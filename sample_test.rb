@@ -2,7 +2,7 @@ require_relative 'minitestw'
 
 class SampleTest < Minitestw::Test
   def setup
-    @user = User.new('Kasa', 'kasa@rubyconftw2023.com')
+    @user = User.new(correct_name, correct_email)
   end
 
   def test_name_with_email
@@ -14,10 +14,27 @@ class SampleTest < Minitestw::Test
     assert @user.email.nil?
   end
 
+  def test_one_passes_one_fails
+    assert_equal correct_name, @user.name
+    assert_equal wrong_email, @user.email
+  end
+
   private
 
   def correct_name_with_email
-    'Kasa <kasa@rubyconftw2023.com>'
+    "#{correct_name} <#{correct_email}>"
+  end
+
+  def correct_name
+    'Kasa'
+  end
+
+  def correct_email
+    'kasa@rubyconftw2023.com'
+  end
+
+  def wrong_email
+    'kasahsiao@rubyconftw2023.com'
   end
 end
 
